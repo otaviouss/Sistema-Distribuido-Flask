@@ -99,13 +99,13 @@ class RV(RecycleView):
 
         dados = c.apresentarVouchers()
 
-        self.rv_data_list.extend([{'imagem': 'figuras/' + dados.v[i].imagem + ".png", 
-                                   'label_titulo': dados.v[i].titulo,
-                                   'label_descricao': dados.v[i].descricao,
-                                   'label_nome_gato': dados.v[i].gato,
-                                   'label_local': dados.v[i].local,
-                                   'label_lanche': dados.v[i].lanche,
-                                   'label_duracao': str(dados.v[i].duracao)} for i in range(len(dados.v))])
+        self.rv_data_list.extend([{'imagem': 'figuras/' + dados[str(i)]["imagem"] + '.png', 
+                                   'label_titulo': dados[str(i)]["titulo"],
+                                   'label_descricao': dados[str(i)]["descricao"],
+                                   'label_nome_gato': dados[str(i)]["gato"],
+                                   'label_local': dados[str(i)]["local"],
+                                   'label_lanche': dados[str(i)]["lanche"],
+                                   'label_duracao': str(dados[str(i)]["duracao"])} for i in range(len(dados))])
     
     
     # Carrega os Vouchers do Usuário Logado
@@ -115,14 +115,13 @@ class RV(RecycleView):
         self.meus_vouchers = dados
         self.id_troca = -1
 
-        self.rv_data_list.extend([{'imagem': 'figuras/' + dados.v[i].imagem + ".png", 
-                                   'label_titulo': dados.v[i].titulo,
-                                   'label_descricao': dados.v[i].descricao,
-                                   'label_nome_gato': dados.v[i].gato,
-                                   'label_local': dados.v[i].local,
-                                   'label_lanche': dados.v[i].lanche,
-                                   'label_duracao': str(dados.v[i].duracao)} for i in range(len(dados.v))])
-    
+        self.rv_data_list.extend([{'imagem': 'figuras/' + dados[str(i)]["imagem"] + '.png', 
+                                   'label_titulo': dados[str(i)]["titulo"],
+                                   'label_descricao': dados[str(i)]["descricao"],
+                                   'label_nome_gato': dados[str(i)]["gato"],
+                                   'label_local': dados[str(i)]["local"],
+                                   'label_lanche': dados[str(i)]["lanche"],
+                                   'label_duracao': str(dados[str(i)]["duracao"])} for i in range(len(dados))])
     
     def PrintTes(self):
         print("-->: ", self.rv_data_list)
@@ -144,13 +143,13 @@ class RV(RecycleView):
         print("HELPS : ", self.dupla_troca)
         todos_vouchers = c.apresentarVouchers()
         print(todos_vouchers)
-        c.proporTroca(self.meus_vouchers.v[self.dupla_troca[1]].id, todos_vouchers.v[self.dupla_troca[0]].id)
+        c.proporTroca(self.meus_vouchers[str(self.dupla_troca[1])]["id"], todos_vouchers[str(self.dupla_troca[0])]["id"])
         self.dupla_troca.clear()
 
 
     def InicializarTrocas(self):
         trocas = c.apresentarTrocas()
-        qtd_trocas = len(trocas.t)
+        qtd_trocas = len(trocas)
 
         self.rv_data_list = []
 
@@ -159,11 +158,11 @@ class RV(RecycleView):
             return
 
         self.rv_data_list.extend([{'label_titulo': 'Troca ' + str(i),
-                                    'label_trocaI_titulo': trocas.t[i].v1.titulo,
-                                    'label_trocaI_gato': trocas.t[i].v1.gato,
-                                    'label_trocaII_titulo': trocas.t[i].v2.titulo,
-                                    'label_trocaII_gato': trocas.t[i].v2.gato,
-                                    'id_troca': str(trocas.t[i].id),
+                                    'label_trocaI_titulo': trocas[str(i)]['titulo_v1'],
+                                    'label_trocaI_gato': trocas[str(i)]['gato_v1'],
+                                    'label_trocaII_titulo': trocas[str(i)]['titulo_v2'],
+                                    'label_trocaII_gato': trocas[str(i)]['gato_v2'],
+                                    'id_troca': str(trocas[str(i)]['id_troca']),
                                     } for i in range(qtd_trocas)])
 
 c = Cliente() # Variável "global" por falta de melhor forma

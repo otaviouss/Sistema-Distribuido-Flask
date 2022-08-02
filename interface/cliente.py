@@ -1,17 +1,15 @@
-from __future__ import print_function
 import json
-
-import logging
 import requests
 
 class Cliente():
 
     def __init__(self):
+        self.user_id = -1
         pass
 
     def solicitarCriarUsuario(self, nome, email, senha):
 
-        response = requests.get('http://127.0.0.1:5000/cadastrarCliente?email='+email+'&nome='+nome+'&senha'+senha)
+        response = requests.get('http://127.0.0.1:5000/cadastrarCliente?email='+email+'&nome='+nome+'&senha='+senha)
 
         if(json.loads(response.text) == "1"):
             print("Sucesso!")
@@ -21,11 +19,11 @@ class Cliente():
 
     def realizarLogin(self, email, senha):
 
-        response = requests.get('http://127.0.0.1:5000/checarCliente?email='+email+'&senha'+senha)
+        response = requests.get('http://127.0.0.1:5000/checarCliente?email='+email+'&senha='+senha)
 
-        if(json.loads(response.text) == "0"):
+        if(json.loads(response.text) != "0"):
             self.user_id = int(json.loads(response.text))
-            print("Logado com Sucesso!")
+            print("Logado com Sucesso! UID: ", self.user_id)
             return 1
         else:
             print("Falha ao Logar!")
@@ -36,10 +34,6 @@ class Cliente():
         response = requests.get('http://127.0.0.1:5000/cadastrarVoucher?titulo='+titulo+'&descricao='+descricao+'&gato='+gato+'&local='+local+'&lanche='+lanche+'&duracao='+str(duracao)+'&titular_id='+str(self.user_id))
 
         print("Cadastrando Voucher")
-
-        print(response)
-
-        print(response.text)
 
         return json.loads(response.text)
     
@@ -65,11 +59,11 @@ class Cliente():
 
         print("Apresentando todas as trocas pendentes.")
 
-        return response.text
+        return json.loads(response.text)
 
     def proporTroca(self, id_voucher1, id_voucher2):
 
-        response = requests.get('http://127.0.0.1:5000/proporTroca?id1='+str(id_voucher1)+'&id2='+str(id_voucher2))
+        response = requests.get(('http://127.0.0.1:5000/proporTroca?id1='+str(id_voucher1)+'&id2='+str(id_voucher2)))
 
         print("Propondo Troca")
 
@@ -80,9 +74,6 @@ class Cliente():
         response = requests.get('http://127.0.0.1:5000/realizarTroca?id_troca='+str(id_troca))
 
         print("Troca Aceita")
-
-        print(response)
-        print(response.text)
 
         return json.loads(response.text)
 
@@ -111,5 +102,4 @@ def main():
     c.realizarLogin("lsls", "123")
 
 if __name__ == '__main__':
-    logging.basicConfig()
     main()

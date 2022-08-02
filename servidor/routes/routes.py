@@ -25,14 +25,14 @@ def proporTroca():
 def realizarTroca():
     id_troca = str(request.args.get('id_troca'))
     trocas = Trocas()
-    response = trocas.proporTroca(id_troca)
+    response = trocas.realizarTroca(id_troca)
     return jsonify(response), 200
 
 @app.get('/negarTroca')
 def negarTroca():
     id_troca = str(request.args.get('id_troca'))
     trocas = Trocas()
-    response = trocas.proporTroca(id_troca)
+    response = trocas.negarTroca(id_troca)
     return jsonify(response), 200
 
 @app.get('/cadastrarCliente')
@@ -69,7 +69,7 @@ def cadastrarVoucher():
 def apresentarVouchersUsuario():
     id = str(request.args.get('id'))
     voucher = Vouchers()
-    response = voucher.apresentarVouchersUsuario(id)
+    response = voucher.apresentarVouchersUsuario(int(id))
     return jsonify(response), 200
 
 @app.get('/apresentarVouchers')
