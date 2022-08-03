@@ -44,7 +44,9 @@ class TelaCadastroUsuario(Screen):
             self.ids.email.text = ''
             self.ids.senha.text = ''
         else:
-            self.ids.cad.text = 'Preencha todos os campos!'
+            #self.ids.cad.text = 'Preencha todos os campos!'
+            popup = Popup(title='Warning', content=Label(text='Preencha todos os campos!'), size_hint=(None, None), size=(400, 200))
+            popup.open()
 
 class Login(Screen):
     
@@ -60,7 +62,7 @@ class Login(Screen):
             return True
         else:
             #self.ids.Jovem.text = 'Preencha todos os campos!'
-            popup = Popup(title='Warning', content=Label(text='Preencha todos os campos!'), size_hint=(None, None), size=(400, 400))
+            popup = Popup(title='Warning', content=Label(text='Preencha todos os campos!'), size_hint=(None, None), size=(400, 200))
             popup.open()
             return False
 
@@ -69,9 +71,12 @@ class Login(Screen):
         if validado:
             self.parent.current = 'telamenu'
         else:
-            popup = Popup(title='Warning', content=Label(text='Credenciais Inválidas!'), size_hint=(None, None), size=(400, 400))
+            popup = Popup(title='Warning', content=Label(text='Credenciais Inválidas!'), size_hint=(None, None), size=(400, 200))
             popup.open()
             #self.ids.Jovem.text = 'Credenciais Inválidas.'
+    
+    def IrParaTelaInicial(self):
+        self.parent.current = 'telainicial'
 
 class TelaVouchers(Screen):
     def IrParaMenu(self):
@@ -133,39 +138,23 @@ class TelaMenu(Screen):
         self.parent.current = 'telainicial'
 
 class TrocatApp(App):
+    manager = ScreenManager()
 
     def build(self):
         Window.clearcolor = ( 218/255, 195/255, 232/255, 1)
-        manager = ScreenManager()
 
-        manager.add_widget(TelaInicial(name='telainicial'))
-        manager.add_widget(Login(name='login'))
-        manager.add_widget(TelaCadastroUsuario(name='telacadastrousuario'))
-        manager.add_widget(TelaMenu(name='telamenu'))
-        manager.add_widget(TelaCadastro(name='telacadastro'))
-        manager.add_widget(TelaMeusVouchers(name='telameusvouchers'))
-        manager.add_widget(TelaVouchers(name='telavouchers'))
-        manager.add_widget(TelaTrocas(name='telatrocas'))
+        self.manager.add_widget(TelaInicial(name='telainicial'))
+        self.manager.add_widget(Login(name='login'))
+        self.manager.add_widget(TelaCadastroUsuario(name='telacadastrousuario'))
+        self.manager.add_widget(TelaMenu(name='telamenu'))
+        self.manager.add_widget(TelaCadastro(name='telacadastro'))
+        self.manager.add_widget(TelaMeusVouchers(name='telameusvouchers'))
+        self.manager.add_widget(TelaVouchers(name='telavouchers'))
+        self.manager.add_widget(TelaTrocas(name='telatrocas'))
 
-        return manager
+        return self.manager
 
 if __name__ == '__main__':
     #c = Cliente() # Variável "global" por falta de melhor forma
     principal = TrocatApp()
     principal.run()
-
-
-'''
-https://stackoverflow.com/questions/40470992/too-many-indentation-levels-in-on-press-button
-https://stackoverflow.com/questions/56226448/how-to-get-the-instance-from-a-recycleview-with-viewclass-as-button
-'''
-
-
-'''
-Ajustes a serem feitos:
- - Alterar a cor do botão quando selecionado na tela de trocas
-
-Problem: 
-    Tá permitindo trocas entre vouchers próprios
-
-'''

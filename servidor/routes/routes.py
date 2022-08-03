@@ -77,9 +77,3 @@ def apresentarVouchers():
     voucher = Vouchers()
     response = voucher.apresentarVouchers()
     return jsonify(response), 200
-
-
-@app.post('/feedback')
-def feedback():
-    return jsonify("feedback")
-
