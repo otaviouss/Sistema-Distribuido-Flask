@@ -50,7 +50,7 @@ Dado este cenário, não é possível um cliente escolher com qual gato irá pas
 
 1. Clone o projeto
 
-        git clone 
+        git clone https://github.com/otaviouss/Sistema-Distribuido-Flask.git
 
 2. Crie um ambiente virtual
 
