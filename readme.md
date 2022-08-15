@@ -111,4 +111,4 @@ Dado este cenário, não é possível um cliente escolher com qual gato irá pas
 Observação: Algumas informações podem ser impressas no terminal tanto do servidor quanto do cliente, o que pode facilitar o entendimento do que está acontecendo no back-end do programa.
 
 ---
-[Arte logo]("https://www.flaticon.com/free-icons/black-cat")
+[Arte logo](https://www.flaticon.com/free-icons/black-cat)
